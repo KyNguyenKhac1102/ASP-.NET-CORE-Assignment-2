@@ -137,7 +137,8 @@ namespace ASP_CORE_MVC.Controllers
                 return RedirectToAction("EveryOne");
             }
         }
-        
+        //Add package!
+        //dotnet add package EPPlus --version 5.7.0
         public IActionResult Export(){
             var stream = new MemoryStream();
             
