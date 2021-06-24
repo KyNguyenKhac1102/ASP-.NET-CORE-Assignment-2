@@ -50,6 +50,10 @@ namespace ASP_CORE_MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                    endpoints.MapControllerRoute(
+                    name: "NashTech",
                     pattern: "NashTech/{controller=Home}/{action=Index}/{id?}");
             });
         }

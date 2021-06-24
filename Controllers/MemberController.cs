@@ -60,7 +60,13 @@ namespace ASP_CORE_MVC.Controllers
                         IsGraduated = false},
         };
 
-
+        
+        public static class Global{
+            public static JsonSerializerOptions option = new JsonSerializerOptions { WriteIndented = true };
+               
+        }
+        
+        
         private readonly ILogger<HomeController> _logger;
 
         public MemberController(ILogger<HomeController> logger)
@@ -71,32 +77,28 @@ namespace ASP_CORE_MVC.Controllers
         public IActionResult MaleMember(){
             List<Member> maleList = memberList.Where(x => x.Gender == "Male").ToList();
 
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(maleList, options);
+            string jsonString = JsonSerializer.Serialize(maleList, Global.option);
             return Content(jsonString);
         }
 
         public IActionResult OldestMember(){
             Member oldest = memberList.Where(x => x.Age == memberList.Max(x => x.Age)).First();
 
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(oldest, options);
+            string jsonString = JsonSerializer.Serialize(oldest, Global.option);
             return Content(jsonString);
         }
 
         public IActionResult FullName(){
             List<string> FullNameList = memberList.Select(x => x.FullName()).ToList();
 
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(FullNameList, options);
+            string jsonString = JsonSerializer.Serialize(FullNameList, Global.option);
             return Content(jsonString);
         }
 
         public IActionResult Equal(){
            List<Member> equalList  = memberList.Where(x => x.DateOfBirth.Year == 2000).ToList();
 
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(equalList, options);
+            string jsonString = JsonSerializer.Serialize(equalList, Global.option);
             return Content(jsonString);
         }
 
@@ -104,8 +106,7 @@ namespace ASP_CORE_MVC.Controllers
         {
             List<Member> lessList = memberList.Where(x => x.DateOfBirth.Year < 2000).ToList();
 
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(lessList, options);
+            string jsonString = JsonSerializer.Serialize(lessList, Global.option);
             return Content(jsonString);
         }
 
@@ -113,14 +114,13 @@ namespace ASP_CORE_MVC.Controllers
         {
             List<Member> moreList = memberList.Where(x => x.DateOfBirth.Year > 2000).ToList();
 
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(moreList, options);
+            string jsonString = JsonSerializer.Serialize(moreList, Global.option);
             return Content(jsonString);
         }
 
         public IActionResult EveryOne(){
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(memberList, options);
+
+            string jsonString = JsonSerializer.Serialize(memberList, Global.option);
             return Content(jsonString);
         }
         public IActionResult Filter(string type, int year){
